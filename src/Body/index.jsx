@@ -1,15 +1,25 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import SideBar from "./SideBar";
 import "./Body.scss";
 import WeatherPeriods from "./WeatherPeriods";
+import { getCurrentWeather } from "../services/apiService";
 
 function Body() {
   const [showSideBar, setShowSideBar] = useState(false);
+  const [currentWeather, setCurrentWeather] = useState(null);
 
   const handleShow = () => setShowSideBar(true);
+
+  useEffect(() => {
+    getCurrentWeather().then((weather) => {
+      setCurrentWeather(weather);
+    });
+  }, []);
+
+  console.log("currentWeather", currentWeather);
 
   return (
     <>
