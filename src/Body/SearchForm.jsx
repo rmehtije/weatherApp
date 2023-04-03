@@ -109,7 +109,7 @@ function SearchForm() {
 
       <Form.Group className="mb-3">
         <Form.Label>Langauges</Form.Label>
-        <Form.Select aria-label="Default select example" name="language">
+        <Form.Select name="language">
           {langauges.map(({ code, label }) => (
             <option value={code} key={code}>
               {label}
