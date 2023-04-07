@@ -19,8 +19,6 @@ function Body() {
     });
   }, []);
 
-  console.log("currentWeather", currentWeather);
-
   return (
     <>
       <div className="my-2">

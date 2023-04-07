@@ -6,16 +6,23 @@ export const defaultParams = {
     lat: 59.437,
     lon: 24.7536,
     mode: "json",
-    units: "standard",
+    units: "standard"
+};
+
+export const generateFetchUrl = (params) => {
+    const searchParams = new URLSearchParams({
+        appid: apiKey,
+        ...defaultParams,
+        ...params
+    });
+
+    return `${apiUrl}/weather?${searchParams}`;
 };
 
 export const getCurrentWeather = async (params) => {
-    const searchParams = new URLSearchParams({
-        appid: apiKey,
-        ...(params || defaultParams),
-    });
+    const url = generateFetchUrl(params);
 
-    const response = await fetch(`${apiUrl}/weather?${searchParams}`);
-    console.log('response', response);
+    const response = await fetch(url);
+
     return await response.json();
 };

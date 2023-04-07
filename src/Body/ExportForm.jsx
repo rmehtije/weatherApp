@@ -1,5 +1,6 @@
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { generateFetchUrl } from "../services/apiService";
 
 function ExportForm() {
   const modes = ["json", "xml", "html"];
@@ -7,7 +8,11 @@ function ExportForm() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    window.open();
+    const mode = event.target.mode.value;
+  
+    const url = generateFetchUrl({ mode  });
+
+    window.open(url);
   };
 
   return (
