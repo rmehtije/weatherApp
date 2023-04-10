@@ -2,9 +2,19 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { getCurrentWeather, defaultParams } from "../services/apiService";
+import {
+  getCurrentWeather,
+  defaultParams,
+  getForecastWeather,
+} from "../services/apiService";
 
-function SearchForm() {
+function SearchForm({
+  setCurrentWeather,
+  setForecastWeather,
+  closeSideBar,
+  selectedData,
+  setSelectedData,
+}) {
   const modes = ["json", "xml", "html"];
 
   const units = ["standard", "metric", "imperial"];
@@ -39,10 +49,19 @@ function SearchForm() {
       lang: event.target.language.value,
     };
 
-    const currentWeather = await getCurrentWeather(params);
+    setSelectedData(params);
 
-    console.log('currentWeather', currentWeather);
+    const currentWeather = await getCurrentWeather(params);
+    const forecastWeather = await getForecastWeather(params);
+
+    setCurrentWeather(currentWeather);
+    setForecastWeather(forecastWeather);
+
+    closeSideBar();
   };
+
+  console.log("selectedData", selectedData);
+  const defaultValue = selectedData || defaultParams;
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -52,7 +71,7 @@ function SearchForm() {
           type="text"
           placeholder="Latitude"
           name="latitude"
-          defaultValue={defaultParams.lat}
+          defaultValue={defaultValue.lat}
         />
         <Form.Text className="text-muted">Example: 59.4370</Form.Text>
       </Form.Group>
@@ -63,7 +82,7 @@ function SearchForm() {
           type="text"
           placeholder="Longitude"
           name="longitude"
-          defaultValue={defaultParams.lon}
+          defaultValue={defaultValue.lon}
         />
         <Form.Text className="text-muted">Example: 24.7536</Form.Text>
       </Form.Group>
@@ -79,7 +98,7 @@ function SearchForm() {
                 key={mode}
                 name="mode"
                 value={mode}
-                defaultChecked={mode === defaultParams.mode}
+                defaultChecked={mode === defaultValue.mode}
                 disabled
               />
             ))}
@@ -96,7 +115,7 @@ function SearchForm() {
                 key={unit}
                 name="unit"
                 value={unit}
-                defaultChecked={unit === defaultParams.units}
+                defaultChecked={unit === defaultValue.units}
               />
             ))}
             <Form.Text className="text-muted">Measurement type</Form.Text>
@@ -106,7 +125,7 @@ function SearchForm() {
 
       <Form.Group className="mb-3">
         <Form.Label>Langauges</Form.Label>
-        <Form.Select name="language">
+        <Form.Select name="language" defaultValue={defaultValue.lang}>
           {langauges.map(({ code, label }) => (
             <option value={code} key={code}>
               {label}
@@ -117,7 +136,7 @@ function SearchForm() {
 
       <div className="d-grid">
         <Button variant="primary" type="submit">
-          Submit
+          Search
         </Button>
       </div>
     </Form>

@@ -17,11 +17,11 @@ function Body() {
   useEffect(() => {
     getCurrentWeather().then((weather) => {
       setCurrentWeather(weather);
-      console.log('weather', weather);
+      console.log("weather", weather);
     });
-    getForecastWeather().then(forecast => {
+    getForecastWeather().then((forecast) => {
       setForecastWeather(forecast);
-      console.log('forecast', forecast);
+      console.log("forecast", forecast);
     });
   }, []);
 
@@ -34,13 +34,21 @@ function Body() {
       </div>
       <Row>
         <Col md={4}>
-          <WeatherPeriods currentWeather={currentWeather}/>
+          <WeatherPeriods
+            currentWeather={currentWeather}
+            forecastWeather={forecastWeather}
+          />
         </Col>
         <Col md={8}>
           <div className="map-example"></div>
         </Col>
       </Row>
-      <SideBar show={showSideBar} handleClose={() => setShowSideBar(false)} />
+      <SideBar
+        show={showSideBar}
+        handleClose={() => setShowSideBar(false)}
+        setCurrentWeather={setCurrentWeather}
+        setForecastWeather={setForecastWeather}
+      />
     </>
   );
 }
