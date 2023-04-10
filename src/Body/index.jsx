@@ -5,17 +5,23 @@ import Button from "react-bootstrap/Button";
 import SideBar from "./SideBar";
 import "./Body.scss";
 import WeatherPeriods from "./WeatherPeriods";
-import { getCurrentWeather } from "../services/apiService";
+import { getCurrentWeather, getForecastWeather } from "../services/apiService";
 
 function Body() {
   const [showSideBar, setShowSideBar] = useState(false);
   const [currentWeather, setCurrentWeather] = useState(null);
+  const [forecastWeather, setForecastWeather] = useState(null);
 
   const handleShow = () => setShowSideBar(true);
 
   useEffect(() => {
     getCurrentWeather().then((weather) => {
       setCurrentWeather(weather);
+      console.log('weather', weather);
+    });
+    getForecastWeather().then(forecast => {
+      setForecastWeather(forecast);
+      console.log('forecast', forecast);
     });
   }, []);
 
@@ -28,7 +34,7 @@ function Body() {
       </div>
       <Row>
         <Col md={4}>
-          <WeatherPeriods />
+          <WeatherPeriods currentWeather={currentWeather}/>
         </Col>
         <Col md={8}>
           <div className="map-example"></div>

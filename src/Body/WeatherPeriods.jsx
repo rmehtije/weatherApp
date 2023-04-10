@@ -1,16 +1,12 @@
-import Tab from 'react-bootstrap/Tab';
-import Tabs from 'react-bootstrap/Tabs';
-import Data from './Data';
+import Tab from "react-bootstrap/Tab";
+import Tabs from "react-bootstrap/Tabs";
+import Data from "./Data";
 
-function WeatherPeriods() {
+function WeatherPeriods({ currentWeather }) {
   return (
-    <Tabs
-      defaultActiveKey="current"
-      className="mb-3"
-      fill
-    >
+    <Tabs defaultActiveKey="current" className="mb-3" fill>
       <Tab eventKey="current" title="Current Weather">
-        <Data />
+        <Data {...currentWeather}/>
       </Tab>
       <Tab eventKey="forecast" title="Forecast">
         <Data />
