@@ -11,7 +11,7 @@ export const defaultParams = {
 
 export const generateFetchUrl = (params, endPoint = 'weather') => {
     const searchParams = new URLSearchParams({
-        appid: apiKey,
+        // appid: apiKey,
         ...defaultParams,
         ...params
     });

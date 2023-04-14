@@ -6,11 +6,13 @@ import SideBar from "./SideBar";
 import "./Body.scss";
 import WeatherPeriods from "./WeatherPeriods";
 import { getCurrentWeather, getForecastWeather } from "../services/apiService";
+import ErrorModal from "../ErrorModal";
 
 function Body() {
   const [showSideBar, setShowSideBar] = useState(false);
   const [currentWeather, setCurrentWeather] = useState(null);
   const [forecastWeather, setForecastWeather] = useState(null);
+  const [showErrorModal, setShowErrorModal] = useState(false);
 
   const handleShow = () => setShowSideBar(true);
 
@@ -31,6 +33,9 @@ function Body() {
         <Button variant="primary" onClick={handleShow}>
           Search
         </Button>
+        <Button variant="primary" onClick={() => setShowErrorModal(true)}>
+          Show Error Modal
+        </Button>
       </div>
       <Row>
         <Col md={4}>
@@ -48,6 +53,10 @@ function Body() {
         handleClose={() => setShowSideBar(false)}
         setCurrentWeather={setCurrentWeather}
         setForecastWeather={setForecastWeather}
+      />
+      <ErrorModal
+        show={showErrorModal}
+        handleClose={() => setShowErrorModal(false)}
       />
     </>
   );
