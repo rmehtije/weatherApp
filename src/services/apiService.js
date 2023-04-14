@@ -11,7 +11,7 @@ export const defaultParams = {
 
 export const generateFetchUrl = (params, endPoint = 'weather') => {
     const searchParams = new URLSearchParams({
-        // appid: apiKey,
+        appid: apiKey,
         ...defaultParams,
         ...params
     });
@@ -24,6 +24,11 @@ export const getCurrentWeather = async (params) => {
 
     const response = await fetch(url);
 
+    if (!response.ok) {
+        const errorMessage = `Current Weather Error ${response.status}: ${response.statusText}`;
+        throw errorMessage;
+    }
+
     return await response.json();
 };
 
@@ -31,6 +36,11 @@ export const getForecastWeather = async (params) => {
     const url = generateFetchUrl(params, 'forecast');
 
     const response = await fetch(url);
+
+    if (!response.ok) {
+        const errorMessage = `Forecast Weather Error ${response.status}: ${response.statusText}`;
+        throw errorMessage;
+    }
 
     return await response.json();
 };

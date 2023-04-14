@@ -12,19 +12,23 @@ function Body() {
   const [showSideBar, setShowSideBar] = useState(false);
   const [currentWeather, setCurrentWeather] = useState(null);
   const [forecastWeather, setForecastWeather] = useState(null);
-  const [showErrorModal, setShowErrorModal] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const handleShow = () => setShowSideBar(true);
 
   useEffect(() => {
-    getCurrentWeather().then((weather) => {
-      setCurrentWeather(weather);
-      console.log("weather", weather);
-    });
-    getForecastWeather().then((forecast) => {
-      setForecastWeather(forecast);
-      console.log("forecast", forecast);
-    });
+    getCurrentWeather()
+      .then((weather) => {
+        setCurrentWeather(weather);
+        console.log("weather", weather);
+      })
+      .catch((errorMessage) => setErrorMessage(errorMessage));
+    getForecastWeather()
+      .then((forecast) => {
+        setForecastWeather(forecast);
+        console.log("forecast", forecast);
+      })
+      .catch((errorMessage) => setErrorMessage(errorMessage));
   }, []);
 
   return (
@@ -32,9 +36,6 @@ function Body() {
       <div className="my-2">
         <Button variant="primary" onClick={handleShow}>
           Search
-        </Button>
-        <Button variant="primary" onClick={() => setShowErrorModal(true)}>
-          Show Error Modal
         </Button>
       </div>
       <Row>
@@ -55,8 +56,8 @@ function Body() {
         setForecastWeather={setForecastWeather}
       />
       <ErrorModal
-        show={showErrorModal}
-        handleClose={() => setShowErrorModal(false)}
+        handleClose={() => setErrorMessage(null)}
+        message={errorMessage}
       />
     </>
   );
