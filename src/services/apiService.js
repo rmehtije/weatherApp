@@ -6,7 +6,7 @@ export const defaultParams = {
     lat: 59.437,
     lon: 24.7536,
     mode: "json",
-    units: "standard"
+    units: "metric"
 };
 
 export const generateFetchUrl = (params, endPoint = 'weather') => {
