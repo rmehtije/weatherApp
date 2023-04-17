@@ -10,10 +10,13 @@ import ErrorModal from "../ErrorModal";
 import Map from "./Map";
 
 function Body() {
+  const defaultTab = "current";
+
   const [showSideBar, setShowSideBar] = useState(false);
   const [currentWeather, setCurrentWeather] = useState(null);
   const [forecastWeather, setForecastWeather] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [selectedTab, setSelectedTab] = useState(defaultTab);
 
   const handleShow = () => setShowSideBar(true);
 
@@ -32,6 +35,14 @@ function Body() {
       .catch((errorMessage) => setErrorMessage(errorMessage));
   }, []);
 
+  const mapPros =
+    selectedTab === defaultTab
+      ? currentWeather
+      : {
+          main: forecastWeather?.list[0].main,
+          coord: forecastWeather?.city.coord,
+        };
+
   return (
     <>
       <div className="my-2">
@@ -44,10 +55,12 @@ function Body() {
           <WeatherPeriods
             currentWeather={currentWeather}
             forecastWeather={forecastWeather}
+            setSelectedTab={setSelectedTab}
+            defaultTab={defaultTab}
           />
         </Col>
         <Col md={8}>
-          <Map {...currentWeather}/>
+          <Map {...mapPros} />
         </Col>
       </Row>
       <SideBar
