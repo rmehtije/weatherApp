@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
@@ -15,6 +16,31 @@ function SearchForm({
   selectedData,
   setSelectedData,
 }) {
+  const [selectedCityIndex, setSelectedCityIndex] = useState(0);
+
+  const cities = [
+    {
+      name: "Tallinn",
+      lat: 59.437,
+      lon: 24.7536,
+    },
+    {
+      name: "Tartu",
+      lat: 58.378,
+      lon: 26.729,
+    },
+    {
+      name: "Parnu",
+      lat: 58.3917,
+      lon: 24.4953,
+    },
+    {
+      name: "Narva",
+      lat: 59.3797,
+      lon: 28.1791,
+    },
+  ];
+
   const modes = ["json", "xml", "html"];
 
   const units = ["standard", "metric", "imperial"];
@@ -60,18 +86,33 @@ function SearchForm({
     closeSideBar();
   };
 
-  console.log("selectedData", selectedData);
   const defaultValue = selectedData || defaultParams;
 
   return (
     <Form onSubmit={handleSubmit}>
+      <Form.Group className="mb-3">
+        <Form.Label>Cities</Form.Label>
+        <Form.Select
+          name="city"
+          onChange={(event) => setSelectedCityIndex(event.target.value)}
+        >
+          {cities.map(({ name }, index) => (
+            <option value={index} key={name}>
+              {name}
+            </option>
+          ))}
+        </Form.Select>
+      </Form.Group>
+
       <Form.Group className="mb-3">
         <Form.Label>Latitude</Form.Label>
         <Form.Control
           type="text"
           placeholder="Latitude"
           name="latitude"
-          defaultValue={defaultValue.lat}
+          value={cities[selectedCityIndex].lat}
+          readOnly
+
         />
         <Form.Text className="text-muted">Example: 59.4370</Form.Text>
       </Form.Group>
@@ -82,7 +123,8 @@ function SearchForm({
           type="text"
           placeholder="Longitude"
           name="longitude"
-          defaultValue={defaultValue.lon}
+          value={cities[selectedCityIndex].lon}
+          readOnly
         />
         <Form.Text className="text-muted">Example: 24.7536</Form.Text>
       </Form.Group>

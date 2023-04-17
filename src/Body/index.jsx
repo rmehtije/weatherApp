@@ -17,6 +17,7 @@ function Body() {
   const [forecastWeather, setForecastWeather] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
   const [selectedTab, setSelectedTab] = useState(defaultTab);
+  const [forecastDateTimeSelect, setForecastDateTimeSelect] = useState(null);
 
   const handleShow = () => setShowSideBar(true);
 
@@ -39,7 +40,7 @@ function Body() {
     selectedTab === defaultTab
       ? currentWeather
       : {
-          main: forecastWeather?.list[0].main,
+          main: forecastDateTimeSelect?.main || forecastWeather?.list[0].main,
           coord: forecastWeather?.city.coord,
         };
 
@@ -57,6 +58,8 @@ function Body() {
             forecastWeather={forecastWeather}
             setSelectedTab={setSelectedTab}
             defaultTab={defaultTab}
+            setForecastDateTimeSelect={setForecastDateTimeSelect}
+            forecastDateTimeSelect={forecastDateTimeSelect}
           />
         </Col>
         <Col md={8}>

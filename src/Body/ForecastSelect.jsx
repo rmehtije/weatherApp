@@ -1,24 +1,21 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Form from "react-bootstrap/Form";
-import Data from "./Data";
 
-function ForecastSelect({ list, city }) {
-  const [weather, setWeather] = useState(null);
-
+function ForecastSelect({ list, setForecastDateTimeSelect }) {
   useEffect(() => {
-    setWeather(list?.[0]);
-  }, [list]);
+    setForecastDateTimeSelect(list?.[0]);
+  }, [list, setForecastDateTimeSelect]);
 
   const handleChange = (event) => {
     const index = event.target.value;
-    setWeather(list[index]);
+    setForecastDateTimeSelect(list[index]);
   };
 
   return (
     <>
       <Form.Group className="mb-3">
-        <Form.Label>Langauges</Form.Label>
-        <Form.Select name="language" onChange={handleChange}>
+        <Form.Label>Date & Time</Form.Label>
+        <Form.Select onChange={handleChange}>
           {list?.map(({ dt_txt }, index) => (
             <option value={index} key={index}>
               {dt_txt}
@@ -26,7 +23,6 @@ function ForecastSelect({ list, city }) {
           ))}
         </Form.Select>
       </Form.Group>
-      <Data {...weather} {...city} />
     </>
   );
 }
