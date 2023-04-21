@@ -36,12 +36,13 @@ function Body() {
       .catch((errorMessage) => setErrorMessage(errorMessage));
   }, []);
 
-  const mapPros =
+  const mapProps =
     selectedTab === defaultTab
       ? currentWeather
       : {
           main: forecastDateTimeSelect?.main || forecastWeather?.list[0].main,
           coord: forecastWeather?.city.coord,
+          weather: forecastDateTimeSelect?.weather,
         };
 
   return (
@@ -63,7 +64,7 @@ function Body() {
           />
         </Col>
         <Col md={8}>
-          <Map {...mapPros} />
+          <Map {...mapProps} />
         </Col>
       </Row>
       <SideBar

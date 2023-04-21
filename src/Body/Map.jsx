@@ -6,7 +6,7 @@ const containerStyle = {
   height: "400px",
 };
 
-function Map({ coord, main }) {
+function Map({ coord, main, weather }) {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: process.env.REACT_APP_GOOLE_MAPS_API_KEY,
@@ -28,7 +28,10 @@ function Map({ coord, main }) {
             lng: coord.lon,
           }}
         >
-          <>{main?.temp}</>
+          <>
+            <div>{main?.temp}</div>
+            <div>{weather[0]?.description}</div>
+          </>
         </InfoWindow>
       </>
     </GoogleMap>
