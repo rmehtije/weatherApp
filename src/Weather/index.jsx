@@ -8,9 +8,14 @@ import WeatherPeriods from "./WeatherPeriods";
 import { getCurrentWeather, getForecastWeather } from "../services/apiService";
 import ErrorModal from "../ErrorModal";
 import Map from "./Map";
+import { useLocation } from "react-router-dom";
 
-function Body() {
-  const defaultTab = "current";
+function Weather() {
+  const location = useLocation();
+
+  const defaultTab = location.pathname.includes("forecast")
+    ? "forecast"
+    : "current";
 
   const [showSideBar, setShowSideBar] = useState(false);
   const [currentWeather, setCurrentWeather] = useState(null);
@@ -44,6 +49,7 @@ function Body() {
           coord: forecastWeather?.city.coord,
           weather: forecastDateTimeSelect?.weather,
         };
+
 
   return (
     <>
@@ -81,4 +87,4 @@ function Body() {
   );
 }
 
-export default Body;
+export default Weather;
