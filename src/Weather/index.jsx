@@ -16,12 +16,12 @@ function Weather({
 }) {
   const location = useLocation();
 
-  const defaultTab = location.pathname.includes("forecast")
-    ? "forecast"
-    : "current";
+  const defaultTab = "current";
 
   const [showSideBar, setShowSideBar] = useState(false);
-  const [selectedTab, setSelectedTab] = useState(defaultTab);
+  const [selectedTab, setSelectedTab] = useState(
+    location.pathname.includes("forecast") ? "forecast" : "current"
+  );
   const [forecastDateTimeSelect, setForecastDateTimeSelect] = useState(null);
 
   const handleShow = () => setShowSideBar(true);
@@ -48,7 +48,7 @@ function Weather({
             currentWeather={currentWeather}
             forecastWeather={forecastWeather}
             setSelectedTab={setSelectedTab}
-            defaultTab={defaultTab}
+            selectedTab={selectedTab}
             setForecastDateTimeSelect={setForecastDateTimeSelect}
             forecastDateTimeSelect={forecastDateTimeSelect}
           />

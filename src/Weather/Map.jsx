@@ -12,7 +12,7 @@ function Map({ coord, main, weather }) {
     googleMapsApiKey: process.env.REACT_APP_GOOLE_MAPS_API_KEY,
   });
 
-  return isLoaded && coord ? (
+  return isLoaded && coord && weather ? (
     <GoogleMap
       mapContainerStyle={containerStyle}
       center={{
@@ -40,4 +40,4 @@ function Map({ coord, main, weather }) {
   );
 }
 
-export default React.memo(Map);
+export default Map;
