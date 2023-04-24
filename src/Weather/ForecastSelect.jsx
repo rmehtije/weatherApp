@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import { useParams } from "react-router-dom";
+import moment from 'moment';
 
 function ForecastSelect({ list, setForecastDateTimeSelect }) {
   const { listIndex } = useParams();
@@ -19,9 +20,9 @@ function ForecastSelect({ list, setForecastDateTimeSelect }) {
       <Form.Group className="mb-3">
         <Form.Label>Date & Time</Form.Label>
         <Form.Select onChange={handleChange} value={listIndex}>
-          {list?.map(({ dt_txt }, index) => (
+          {list?.map(({ dt }, index) => (
             <option value={index} key={index}>
-              {dt_txt}
+              {moment.unix(dt).format('DD.MM HH:mm')}
             </option>
           ))}
         </Form.Select>
