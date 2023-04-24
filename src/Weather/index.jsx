@@ -1,16 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import SideBar from "./SideBar";
 import "./Body.scss";
 import WeatherPeriods from "./WeatherPeriods";
-import { getCurrentWeather, getForecastWeather } from "../services/apiService";
-import ErrorModal from "../ErrorModal";
 import Map from "./Map";
 import { useLocation } from "react-router-dom";
 
-function Weather() {
+function Weather({
+  currentWeather,
+  forecastWeather,
+  setCurrentWeather,
+  setForecastWeather,
+}) {
   const location = useLocation();
 
   const defaultTab = location.pathname.includes("forecast")
@@ -18,28 +21,10 @@ function Weather() {
     : "current";
 
   const [showSideBar, setShowSideBar] = useState(false);
-  const [currentWeather, setCurrentWeather] = useState(null);
-  const [forecastWeather, setForecastWeather] = useState(null);
-  const [errorMessage, setErrorMessage] = useState(null);
   const [selectedTab, setSelectedTab] = useState(defaultTab);
   const [forecastDateTimeSelect, setForecastDateTimeSelect] = useState(null);
 
   const handleShow = () => setShowSideBar(true);
-
-  useEffect(() => {
-    getCurrentWeather()
-      .then((weather) => {
-        setCurrentWeather(weather);
-        console.log("weather", weather);
-      })
-      .catch((errorMessage) => setErrorMessage(errorMessage));
-    getForecastWeather()
-      .then((forecast) => {
-        setForecastWeather(forecast);
-        console.log("forecast", forecast);
-      })
-      .catch((errorMessage) => setErrorMessage(errorMessage));
-  }, []);
 
   const mapProps =
     selectedTab === defaultTab
@@ -49,7 +34,6 @@ function Weather() {
           coord: forecastWeather?.city.coord,
           weather: forecastDateTimeSelect?.weather,
         };
-
 
   return (
     <>
@@ -78,10 +62,6 @@ function Weather() {
         handleClose={() => setShowSideBar(false)}
         setCurrentWeather={setCurrentWeather}
         setForecastWeather={setForecastWeather}
-      />
-      <ErrorModal
-        handleClose={() => setErrorMessage(null)}
-        message={errorMessage}
       />
     </>
   );
