@@ -10,23 +10,29 @@ import { Routes, Route } from 'react-router-dom';
 import './App.scss';
 
 function App() {
+  console.log('App');
   const [currentWeather, setCurrentWeather] = useState(null);
   const [forecastWeather, setForecastWeather] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
 
   useEffect(() => {
-    getCurrentWeather()
-      .then((weather) => {
+
+    (async () => {
+  
+      try {
+        const weather = await getCurrentWeather();
+        const forecast = await getForecastWeather();
+
         setCurrentWeather(weather);
-        console.log("weather", weather);
-      })
-      .catch((errorMessage) => setErrorMessage(errorMessage));
-    getForecastWeather()
-      .then((forecast) => {
         setForecastWeather(forecast);
-        console.log("forecast", forecast);
-      })
-      .catch((errorMessage) => setErrorMessage(errorMessage));
+
+      } catch (errorMessage) {
+        setErrorMessage(errorMessage);
+      }
+
+    })();
+
+    console.log('Fetch Weather');
   }, []);
 
   const weatherProps = {
@@ -38,7 +44,7 @@ function App() {
 
   return (
     <Container>
-      <Header />
+      <Header {...forecastWeather} />
       <Routes>
         <Route path="/" element={<Weather {...weatherProps} />} />
         <Route path="/forecast/:listIndex" element={<Weather {...weatherProps} />} />

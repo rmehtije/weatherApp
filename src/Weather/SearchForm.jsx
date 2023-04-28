@@ -16,6 +16,7 @@ function SearchForm({
   selectedData,
   setSelectedData,
 }) {
+  console.log('SearchForm');
   const [selectedCityIndex, setSelectedCityIndex] = useState(0);
 
   const cities = [

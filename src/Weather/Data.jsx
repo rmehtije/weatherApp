@@ -1,8 +1,15 @@
 import Table from "react-bootstrap/Table";
 import moment from "moment";
+import { useSelector } from "react-redux";
 
-function Data({ name, main, weather, dt }) {
-  const futureDate = moment.unix(dt);
+function Data({ name, main, weather, dt, selectedTab }) {
+  console.log('Data');
+
+  const forecastDateTimeSelect = useSelector((state) => state.forecastDateTimeSelect);
+
+  const data = selectedTab === 'current' ? { main, weather, dt } : forecastDateTimeSelect;
+
+  const futureDate = moment.unix(data?.dt);
   const currentDate = moment();
   const duration = moment.duration(futureDate.diff(currentDate));
 
@@ -15,15 +22,15 @@ function Data({ name, main, weather, dt }) {
         </tr>
         <tr>
           <td>Temp</td>
-          <td>{main?.temp}</td>
+          <td>{data?.main?.temp}</td>
         </tr>
         <tr>
           <td>Feels like</td>
-          <td>{main?.feels_like}</td>
+          <td>{data?.main?.feels_like}</td>
         </tr>
         <tr>
           <td>Description</td>
-          <td>{weather?.length && weather[0].description}</td>
+          <td>{data?.weather?.length && data?.weather[0].description}</td>
         </tr>
         <tr>
           <td>Valid until</td>

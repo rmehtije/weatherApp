@@ -2,9 +2,15 @@ import { useState } from "react";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import SearchForm from "./SearchForm";
 import ExportForm from "./ExportForm";
+import { useSelector } from "react-redux";
 
-function SideBar({ show, handleClose, setCurrentWeather, setForecastWeather }) {
+function SideBar({ handleClose, setCurrentWeather, setForecastWeather }) {
+  console.log("SideBar");
+
+  const show = useSelector((state) => state.showSideBar);
+
   const [selectedData, setSelectedData] = useState(null);
+
   return (
     <Offcanvas show={show} onHide={handleClose}>
       <Offcanvas.Header closeButton>

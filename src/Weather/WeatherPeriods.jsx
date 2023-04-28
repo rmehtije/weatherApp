@@ -8,9 +8,8 @@ function WeatherPeriods({
   forecastWeather,
   setSelectedTab,
   selectedTab,
-  setForecastDateTimeSelect,
-  forecastDateTimeSelect,
 }) {
+  console.log('WeatherPeriods');
   return (
     <Tabs
       defaultActiveKey={selectedTab}
@@ -19,14 +18,13 @@ function WeatherPeriods({
       onSelect={(eventKey) => setSelectedTab(eventKey)}
     >
       <Tab eventKey="current" title="Current Weather">
-        <Data {...currentWeather} />
+        <Data {...currentWeather} selectedTab={selectedTab}/>
       </Tab>
       <Tab eventKey="forecast" title="Forecast">
         <ForecastSelect
           {...forecastWeather}
-          setForecastDateTimeSelect={setForecastDateTimeSelect}
         />
-        <Data {...forecastDateTimeSelect} {...forecastWeather?.city} />
+        <Data {...forecastWeather?.city} selectedTab={selectedTab}/>
       </Tab>
     </Tabs>
   );
