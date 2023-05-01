@@ -10,7 +10,6 @@ import { Routes, Route } from 'react-router-dom';
 import './App.scss';
 
 function App() {
-  console.log('App');
   const [currentWeather, setCurrentWeather] = useState(null);
   const [forecastWeather, setForecastWeather] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
@@ -46,9 +45,9 @@ function App() {
     <Container>
       <Header {...forecastWeather} />
       <Routes>
-        <Route path="/" element={<Weather {...weatherProps} />} />
-        <Route path="/forecast/:listIndex" element={<Weather {...weatherProps} />} />
-        <Route path="/contact" element={<Contact />} />
+        <Route path="/weatherApp" element={<Weather {...weatherProps} />} />
+        <Route path="/weatherApp/forecast/:listIndex" element={<Weather {...weatherProps} />} />
+        <Route path="/weatherApp/contact" element={<Contact />} />
       </Routes>
       <Footer />
       <ErrorModal

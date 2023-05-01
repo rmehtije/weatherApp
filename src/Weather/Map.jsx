@@ -8,7 +8,6 @@ const containerStyle = {
 };
 
 function Map({ selectedTab, defaultTab, currentWeather, forecastWeather }) {
-  console.log("Map");
 
   const forecastDateTimeSelect = useSelector(
     (state) => state.forecastDateTimeSelect

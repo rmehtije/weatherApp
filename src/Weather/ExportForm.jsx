@@ -3,7 +3,6 @@ import Button from "react-bootstrap/Button";
 import { generateFetchUrl } from "../services/apiService";
 
 function ExportForm() {
-  console.log('ExportForm');
   const modes = ["json", "xml", "html"];
 
   const handleSubmit = (event) => {

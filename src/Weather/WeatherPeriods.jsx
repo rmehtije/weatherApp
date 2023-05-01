@@ -9,7 +9,6 @@ function WeatherPeriods({
   setSelectedTab,
   selectedTab,
 }) {
-  console.log('WeatherPeriods');
   return (
     <Tabs
       defaultActiveKey={selectedTab}

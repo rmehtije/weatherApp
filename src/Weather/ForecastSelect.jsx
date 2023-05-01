@@ -4,9 +4,9 @@ import { useParams } from "react-router-dom";
 import moment from "moment";
 import { setForecastDateTimeSelect } from "../services/stateService";
 import { useDispatch } from "react-redux";
+import { FORECAST_DATE_FORMAT } from "../constants";
 
 function ForecastSelect({ list }) {
-  console.log("ForecastSelect");
 
   const { listIndex } = useParams();
   const dispatch = useDispatch();
@@ -27,7 +27,7 @@ function ForecastSelect({ list }) {
         <Form.Select onChange={handleChange} value={listIndex}>
           {list?.map(({ dt }, index) => (
             <option value={index} key={index}>
-              {moment.unix(dt).format("DD.MM HH:mm")}
+              {moment.unix(dt).format(FORECAST_DATE_FORMAT)}
             </option>
           ))}
         </Form.Select>

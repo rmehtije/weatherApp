@@ -3,7 +3,6 @@ import moment from "moment";
 import { useSelector } from "react-redux";
 
 function Data({ name, main, weather, dt, selectedTab }) {
-  console.log('Data');
 
   const forecastDateTimeSelect = useSelector((state) => state.forecastDateTimeSelect);
 

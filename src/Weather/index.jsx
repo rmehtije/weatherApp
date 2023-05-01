@@ -2,13 +2,16 @@ import { useState } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import SideBar from "./SideBar";
-import "./Body.scss";
-import WeatherPeriods from "./WeatherPeriods";
-import Map from "./Map";
 import { useLocation } from "react-router-dom";
 import { useDispatch } from 'react-redux';
+
+import SideBar from "./SideBar";
+import WeatherPeriods from "./WeatherPeriods";
+import Map from "./Map";
+
 import { setShowSideBar } from "../services/stateService";
+
+import "./Body.scss";
 
 function Weather({
   currentWeather,
@@ -16,7 +19,6 @@ function Weather({
   setCurrentWeather,
   setForecastWeather,
 }) {
-  console.log('Weather');
   const location = useLocation();
   const dispatch = useDispatch();
 

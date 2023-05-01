@@ -5,7 +5,6 @@ import ExportForm from "./ExportForm";
 import { useSelector } from "react-redux";
 
 function SideBar({ handleClose, setCurrentWeather, setForecastWeather }) {
-  console.log("SideBar");
 
   const show = useSelector((state) => state.showSideBar);
 
