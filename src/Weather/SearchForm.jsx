@@ -64,6 +64,14 @@ function SearchForm({
     },
   ];
 
+  // Vse obrabotchiki sobytija pishutsa 4erez kljuchevoje slove handle.
+  // Obrabotchik sobytija prinemajet v sebja objekt sobytija.
+  // Objekt sobytija prihodit iz brauzera s polnym otchjotom o sobitii.
+  // Glanoje svojsto objecta sobitija eto target, v kotorom derzhitsa informacija o elemente s kotorym slu4ilos' sobytije.
+  // V nashem slu4ii eto element <form> kotoryj otprvel dannye na server.
+  // no my pojmali eto sobytije i ostanovili jego dejstvije po umolchanije 4erez metod preventDefault();
+  // Pri otpravki dannyh element <form> sobirajet vse dannyje ot pol'zovatelja i gruperujet ih po naznaviju.
+  // React berjot eto vsjo i v udobnom nam vide 4erez objekt predostovljajet vsju informaciju kotoryj pol'zovatel' vbil v formu.
   const handleSubmit = async (event) => {
     event.preventDefault();
 

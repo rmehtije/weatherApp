@@ -19,7 +19,11 @@ function Weather({
   setCurrentWeather,
   setForecastWeather,
 }) {
+  // useLocation - react-router-dom hook dlja opredelenija url v kotorom my nahodimsa. 
+  // Pri izmenenii url useLocation jesli on ostajotsa na tomzhe komponente to on zastovljajet komponent renderitsa.
   const location = useLocation();
+  // useDispatch - peredajot funkcqju kotoraja kotoraja obshajetsa s reduxom.
+  // dispatch trigerit redux i prinemajet v sebja triger sostojanija tojest akshen
   const dispatch = useDispatch();
 
   const defaultTab = "current";

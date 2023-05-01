@@ -8,6 +8,11 @@ import { FORECAST_DATE_FORMAT } from "../constants";
 
 function ForecastSelect({ list }) {
 
+  // useParams - eto hook react-router-dom kotoryj sledit za parametrami peredannymi v url. 
+  // v routore my naznachili nazvanie paramentrs 4erez ":". 
+  // vsjo 4to my peredadim v url vmesto nazvanije etogo parametra, react-router-dom podstavit eto znachenije v objekt kotoryj 
+  // useParams smozhet prochitat'.
+  // pri izmenii etogo parametra useParams zanogo otrisujet komponent;
   const { listIndex } = useParams();
   const dispatch = useDispatch();
 

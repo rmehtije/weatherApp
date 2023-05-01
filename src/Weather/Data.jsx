@@ -3,6 +3,10 @@ import moment from "moment";
 import { useSelector } from "react-redux";
 
 function Data({ name, main, weather, dt, selectedTab }) {
+  
+  // useSelector obshajetsa s redux i slushajet izmenenije sostojanija. 
+  // 4to slushat' my peredajom cherez funkcqju kotoroj my tjanem sostojanije i vozvrashajem neobhodimoe sostojanie.
+  // useSelector rabotajet takzhe kak useState, pri izmenenii zapuskajet render dannogo komponenta.
 
   const forecastDateTimeSelect = useSelector((state) => state.forecastDateTimeSelect);
 
